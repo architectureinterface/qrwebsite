@@ -97,14 +97,26 @@ header {
 .floating-cards-container {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 65px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
   z-index: 20;
   height: 40vh; /* Fixed container height */
+  width: 15vw;
   opacity: 0;
   transition: opacity 1.5s ease-in-out 1s;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .floating-card-container {
+    width: 80vw;         /* 80% of screen width */
+    height: 35vh;        /* 35% of screen height */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centered on screen */
+  }
 }
 
 .floating-cards-container.visible {
