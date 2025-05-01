@@ -92,7 +92,8 @@ header {
     font-size: 1.5em;
     margin-bottom: 0;
 }
-/* Default (desktop) */
+
+/* Container for all floating cards */
 .floating-cards-container {
   position: fixed;
   bottom: 20px;
@@ -100,23 +101,25 @@ header {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  z-index: 20;
-  height: 40vh;
+  height: 40vh; /* Fixed container height */
   width: 15vw;
   opacity: 0;
   transition: opacity 1.5s ease-in-out 1s;
-  box-sizing: border-box; /* 🔧 Important to prevent overflow if there's padding */
+  box-sizing: border-box;
+  z-index: 9999;   
 }
 
 /* Mobile responsiveness */
 @media (max-width: 600px) {
   .floating-cards-container {
-    position: fixed;               /* 🔄 Keep it fixed to screen, not absolute */
-    width: 80vw;                   /* 80% of screen width */
-    height: 35vh;                  /* 35% of screen height */
-    left: 50%;
-    bottom: 7%;
-    transform: translateX(-50%);   /* Center horizontally */
+    position: fixed;
+    width: 80vw;             /* 80% of viewport width */
+    height: 35vh;            /* 35% of viewport height */
+    left: 50%;               /* Move horizontal center to middle */
+    bottom: 7%;            /* 7% from the bottom of the screen */
+    transform: translateX(-50%); /* Center horizontally only */
+    max-width: 80vw;        /* Prevent overflow */
+    max-height: 35vh;       /* Prevent overflow */
   }
 }
 
