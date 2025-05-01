@@ -1,0 +1,196 @@
+body {
+    margin: 0;
+    font-family: 'Roboto',
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+    background-color: #000000;
+}
+
+header {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10; /* Ensure logo is on top */
+}
+
+.logo {
+    height: 90px; /* Bigger logo */
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center; /* Vertically align text container */
+    overflow: hidden; /* Clip the zoomed image */
+}
+
+.hero-image {
+    position: fixed; /* Fixed positioning to cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('background.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.1); /* Initial slight zoom */
+    animation: zoomOut 5s ease-out forwards;
+    z-index: 1; /* Place it behind other content */
+}
+
+@keyframes zoomOut {
+    to {
+        transform: scale(1);
+    }
+}
+
+.hero-text-container {
+    position: absolute;
+    top: 30%;
+    left: 65px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif; /* Using Roboto */
+    font-style: normal; /* Apply italic style */
+    font-weight: 300; /* Apply light weight */
+    z-index: 2;
+    text-align: left;
+    width: auto;
+}
+
+.hero-heading {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif; /* Using Roboto */
+    font-weight: 700; /* Apply medium weight */
+    font-size: 4.5em;
+}
+
+.hero-subheading {
+    font-family: 'Roboto', sans-serif; /* Using Roboto */
+    font-style: italic; /* Apply italic style */
+    font-weight: 300; /* Apply light weight */
+    font-size: 1.5em;
+    margin-bottom: 0;
+}
+
+.floating-cards-container {
+    position: fixed; /* Fixed positioning to stay at the bottom right */
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column; /* Stack cards vertically */
+    gap: 20px;
+    z-index: 5; /* Ensure cards are above the background */
+    align-items: flex-end; /* Align cards to the right */
+}
+
+.floating-card {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    width: 300px; /* Adjust card width */
+}
+
+.floating-card img {
+    width: 100px; /* Adjust image size */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.card-content h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+#modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+  z-index: 999;
+  display: none;
+}
+
+#modal-backdrop.active {
+  background: rgba(0, 0, 0, 0.6);
+  display: block;
+}
+
+#modal-view {
+  position: fixed;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: all 0.7s ease;
+  z-index: 1001;
+  display: none;
+}
+
+#modal-view.open {
+  top: 50% !important;
+  left: 50% !important;
+  width: 80vw !important;
+  height: 60vh !important;
+  transform: translate(-50%, -50%) !important;
+  overflow-y: auto;
+}
+
+.modal-content {
+  padding: 2rem;
+  max-height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: #ff5252;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1002;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .logo {
+        height: 70px;
+    }
+
+    .hero-text-container {
+        top: 20%; /* Adjust vertical position on smaller screens */
+        left: 20px;
+    }
+
+    .hero-heading {
+        font-size: 2em;
+    }
+
+    .hero-subheading {
+        font-size: 1em;
+    }
+
+    .floating-cards-container {
+        bottom: 10px;
+        right: 10px;
+        gap: 10px;
+    }
+
+    .floating-card {
+        width: 90%;
+    }
+}

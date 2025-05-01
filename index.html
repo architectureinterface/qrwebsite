@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Interface</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto',
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+            background-color: #000000; /* Your website's background color */
+        }
+
+        #loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000; /* Or your loading screen background color */
+            z-index: 1000;
+            opacity: 1; /* Initially visible */
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        #loading-container.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #loading-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1001;
+            opacity: 1; /* Initially visible */
+            transition: opacity 2s ease-in-out; /* Fade out this image */
+        }
+
+        #loading-logo {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0);
+                    height: 100px;
+                    z-index: 1002;
+                    opacity: 0; /* Start invisible */
+                    transition: transform 1.5s ease-in-out,
+                                top 1.5s ease-in-out,
+                                left 1.5s ease-in-out,
+                                height 1.5s ease-in-out,
+                                opacity 1.5s ease-in-out;
+                }
+
+        #loading-logo.visible {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        #loading-image.loaded {
+            opacity: 0;
+        }
+
+                
+
+        #loading-logo.moved {
+            top: 65px; /* Final top position */
+            left: 65px; /* Final left position */
+            transform: translate(0, 0) scale(1);
+            height: 70px; /* Final size */
+            opacity: 1; /* Ensure it stays visible */
+        }
+
+        #main-content {
+            position: relative; /* Ensure it's in the flow */
+            z-index: 999; /* Below loading screen initially */
+            opacity: 1; /* Initially hidden */
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+        }
+
+        header {
+            position: fixed; /* Ensure fixed positioning */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            z-index: 10;
+            height: 90px; /* Height of the header */
+            width: 100%; /* Full width */
+            display: flex;
+            align-items: center; /* Vertically center content */
+            padding-left: 30px; /* Left padding for the logo */
+            opacity: 1; /* Make header visible from the start */
+        }
+
+        .logo {
+            height: 70px; /* Final logo size */
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 90px; /* Add padding to avoid overlap with fixed header */
+        }
+
+        .hero-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.1);
+            animation: zoomOut 8s ease-out forwards;
+            z-index: -1;
+            opacity: 1; /* Initially visible */
+        }
+
+        .floating-cards-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 20;
+    align-items: flex-end;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1.5s ease-in-out 1s;
+}
+
+.floating-cards-container.visible {
+    opacity: 1;
+}
+
+.floating-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 300px;
+    cursor: pointer; /* Indicate it's clickable */
+    position: relative; /* For absolute positioning of expanded content */
+    z-index: 10;
+    transition: transform 0.3s ease-in-out;
+}
+
+.floating-card.expanded {
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            max-height: 80vh;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            flex-direction: column; /* Stack image and expanded content */
+            align-items: stretch; /* Stretch expanded content width */
+            overflow-y: auto; /* Enable scrolling within expanded card */
+        }
+
+        .floating-card.expanded .card-content {
+            display: none; /* Hide summary content when expanded */
+        }
+
+        .floating-card.expanded .card-expanded-content {
+            display: block; /* Show expanded content */
+            padding: 20px;
+            text-align: left;
+        }
+
+        .card-expanded-content {
+            display: none; /* Hidden by default */
+        }
+
+        .expand-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #555;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            line-height: 1;
+        }
+
+.floating-card:hover {
+    transform: translateY(-5px);
+}
+
+.floating-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-content h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.card-content p {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 0;
+}
+
+ .modal-view {
+  position: fixed;
+  z-index: 1000;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  display: none;
+  transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1); /* smoother easing */
+
+}
+
+.modal-view.open {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+  width: 80vw !important;
+  height: 80vh !important;
+}
+
+#modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease-in-out;
+  z-index: 999;
+  display: none;
+}
+
+#modal-backdrop.active {
+  background: rgba(0, 0, 0, 0.6);
+  display: block;
+}
+
+
+.modal-view .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff5f5f;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
+}
+    </style>
+</head>
+<body style="font-family: 'HelveticaNeueMedium', sans-serif;">
+    <div id="loading-container">
+    </div>
+
+    <img id="loading-image" src="loading-background.jpg" alt="Loading Background">
+    <img id="loading-logo" src="logo.png" alt="Logo" class="logo">
+
+    <div id="main-content">
+        <header>
+            </header>
+
+        <main class="hero">
+            <div class="hero-image"></div>
+            <div class="hero-text-container">
+                <h1 class="hero-heading">Curated Spaces. Personalised Luxury</h1>
+                <p class="hero-subheading">Subtext</p>
+            </div>
+        </main>
+
+        <div class="floating-cards-container">
+            <div class="floating-card about-us-card">
+                <img src="about-us.jpg" alt="About Us Image">
+                <div class="card-content">
+                    <h2>About Us</h2>
+                    <p>This is some information about our amazing company and what we do.</p>
+                    <button class="expand-button">+</button>
+                </div>
+            </div>
+
+            <div class="floating-card contact-us-card">
+                <img src="contact-us.jpg" alt="Contact Us Image">
+                <div class="card-content">
+                    <h2>Contact Us</h2>
+                    <p>Feel free to reach out to us for any inquiries or support.</p>
+                    <button class="expand-button">+</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-view" class="modal-view">
+  <button class="close-button">Close</button>
+  <div class="modal-content"></div>
+</div>
+    </div>
+    <div id="modal-backdrop"></div>
+<div id="modal-view" class="modal-view">
+  <button class="close-button">Close</button>
+  <div class="modal-content"></div>
+</div>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingContainer = document.getElementById('loading-container');
+    const loadingImage = document.getElementById('loading-image');
+    const loadingLogo = document.getElementById('loading-logo');
+    const mainHeader = document.querySelector('header');
+    const mainContent = document.getElementById('main-content');
+    const floatingCardsContainer = document.querySelector('.floating-cards-container');
+    const closeButtons = document.querySelectorAll('.close-button');
+    const modalContainers = document.querySelectorAll('.modal-container');
+
+    const backdrop = document.getElementById('modal-backdrop');
+    const modal = document.getElementById('modal-view');
+    const modalContent = modal.querySelector('.modal-content');
+    const modalCloseBtn = modal.querySelector('.close-button');
+
+    const logoFadeInPopOutTime = 1600;
+    const logoMoveTime = 1600;
+
+    setTimeout(() => {
+        loadingLogo.classList.add('visible');
+
+        setTimeout(() => {
+            loadingLogo.classList.add('moved');
+
+            setTimeout(() => {
+                loadingContainer.classList.add('loaded');
+                loadingImage.classList.add('loaded');
+                mainContent.classList.add('visible');
+                floatingCardsContainer.classList.add('visible');
+                document.body.style.overflow = 'auto';
+
+                setTimeout(() => {
+                    loadingImage.remove();
+                    loadingContainer.remove();
+                }, 2000);
+
+                const aboutUsCard = document.querySelector('.about-us-card');
+                const contactUsCard = document.querySelector('.contact-us-card');
+
+                // OPEN MODAL BY ID
+                function openModal(modalId) {
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.style.display = 'flex';
+                    } else {
+                        console.error(`Modal with ID '${modalId}' not found!`);
+                    }
+                }
+
+                // CLOSE MODAL CONTAINER
+                function closeModal(modal) {
+                    if (modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+
+                if (aboutUsCard) {
+                    aboutUsCard.addEventListener('click', function() {
+                        const modalId = this.getAttribute('data-modal');
+                        openModal(modalId);
+                    });
+                }
+
+                if (contactUsCard) {
+                    contactUsCard.addEventListener('click', function() {
+                        const modalId = this.getAttribute('data-modal');
+                        openModal(modalId);
+                    });
+                }
+
+                closeButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const modal = this.closest('.modal-container');
+                        closeModal(modal);
+                    });
+                });
+
+                // Floating Card -> Modal Transition
+                 // Floating Card Click
+                 document.querySelectorAll('.floating-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const rect = card.getBoundingClientRect();
+
+      // Set initial position & size to match clicked card
+      modal.style.display = 'block';
+      modal.style.top = `${rect.top}px`;
+      modal.style.left = `${rect.left}px`;
+      modal.style.width = `${rect.width}px`;
+      modal.style.height = `${rect.height}px`;
+      modal.style.transform = 'none';
+
+      // Force next frame before transitioning
+      requestAnimationFrame(() => {
+  modal.classList.add('open');
+  modalContent.innerHTML = `
+    <h2>Expanded Card</h2>
+    <p>This is dummy content replacing the card's original text. Add anything here to simulate expanded view.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae sapien vel nisi convallis commodo.</p>
+  `;
+  setupClickOutsideToClose(); // 🔥 Attach outside click listener safely
+});
+    });
+  });
+
+  modalCloseBtn.addEventListener('click', () => {
+    modal.classList.remove('open');
+
+    // Hide modal and clear content after animation
+    modal.addEventListener('transitionend', function handler() {
+      modal.style.display = 'none';
+      modalContent.innerHTML = '';
+      modal.removeEventListener('transitionend', handler);
+    }, { once: true });
+  });
+
+  // Click outside modal-content to close modal
+function setupClickOutsideToClose() {
+    function outsideClickHandler(event) {
+        // If the modal is open and click is outside the content
+        if (
+            modal.style.display === 'block' &&
+            modal.classList.contains('open') &&
+            !modalContent.contains(event.target)
+        ) {
+            modal.classList.remove('open');
+            modal.addEventListener('transitionend', function handler() {
+                modal.style.display = 'none';
+                modalContent.innerHTML = '';
+                document.removeEventListener('click', outsideClickHandler);
+                modal.removeEventListener('transitionend', handler);
+            }, { once: true });
+        }
+    }
+
+    // Click outside modal-content to close modal
+function setupClickOutsideToClose() {
+    function outsideClickHandler(event) {
+        // If the modal is open and click is outside the content
+        if (
+            modal.style.display === 'block' &&
+            modal.classList.contains('open') &&
+            !modalContent.contains(event.target)
+        ) {
+            modal.classList.remove('open');
+            modal.addEventListener('transitionend', function handler() {
+                modal.style.display = 'none';
+                modalContent.innerHTML = '';
+                document.removeEventListener('click', outsideClickHandler);
+                modal.removeEventListener('transitionend', handler);
+            }, { once: true });
+        }
+    }
+
+    // Add listener slightly delayed to avoid conflicting with initial card click
+    setTimeout(() => {
+        document.addEventListener('click', outsideClickHandler);
+    }, 100);
+}
+
+
+    // Add listener slightly delayed to avoid conflicting with initial card click
+    setTimeout(() => {
+        document.addEventListener('click', outsideClickHandler);
+    }, 100);
+}
+
+
+
+            }, logoMoveTime);
+        }, logoFadeInPopOutTime);
+    }, 500);
+});
+</script>
+
+
+
+</body>
+</html>
