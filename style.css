@@ -1,10 +1,17 @@
-body {
-    margin: 0;
-    font-family: 'Roboto';
-    overflow-x: hidden; /* Prevent horizontal scrollbar */
-    background-color: #000000;
+/* General Body Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;  /* Prevent both vertical and horizontal scroll */
+  height: 100vh;
+  width: 100vw;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Header and Logo */
 header {
     position: fixed;
     top: 20px;
@@ -16,6 +23,7 @@ header {
     height: 90px; /* Bigger logo */
 }
 
+/* Hero Section */
 .hero {
     position: relative;
     height: 100vh;
@@ -73,73 +81,80 @@ header {
     margin-bottom: 0;
 }
 
-/* Floating Cards at Bottom-Right */
+/* Container for all floating cards */
 .floating-cards-container {
-    position: fixed; /* Fixed positioning to stay at the bottom right */
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column; /* Stack cards vertically */
-    gap: 15px;
-    z-index: 5; /* Ensure cards are above the background */
-    align-items: flex-end; /* Align cards to the right */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 20;
+  height: 40vh; /* Fixed container height */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out 1s;
 }
 
-/* Floating Card Styles */
+.floating-cards-container.visible {
+  opacity: 1;
+}
+
 .floating-card {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: flex-start;
-    padding: 12px;
-    width: 260px;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-.floating-card img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-right: 12px;
+  display: flex;
+  flex: 1 1 0; /* Grow equally to fill container height */
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    max-width: calc(100% - 70px);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
 
-.card-content h2 {
-    font-size: 1.1em;
-    margin: 0 0 6px 0;
-    color: #000;
+.left-column {
+  flex: 1 1 40%;
+  overflow: hidden;
 }
 
-.card-content p {
-    font-size: 0.9em;
-    margin: 0;
-    color: #333;
+.left-column img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* Card Expansion on Click (Add this class when card is clicked) */
-.floating-card.expand {
-    width: 300px; /* Expanded width */
-    height: 350px; /* Expanded height */
-    padding: 25px;
+.right-column {
+  flex: 1 1 60%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.floating-card.expand img {
-    width: 100px; /* Expanded image size */
-    height: 100px;
+.card-heading {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 6px;
 }
 
-.floating-card.expand .card-content h2 {
-    font-size: 1.2em; /* Larger text for expanded card */
+.card-text {
+  font-size: 0.95em;
+  color: #555;
 }
+
+
+
+/* On hover effect */
+.floating-card:hover {
+    transform: translateY(-5px);
+}
+
 
 /* Modal and other modal related styles */
 
@@ -199,33 +214,94 @@ header {
   z-index: 1002;
 }
 
+/* Loading Screen Styles */
+#loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000; /* Or your loading screen background color */
+    z-index: 1000;
+    opacity: 1; /* Initially visible */
+    transition: opacity 1.5s ease-in-out;
+}
+
+#loading-container.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#loading-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1001;
+    opacity: 1; /* Initially visible */
+    transition: opacity 2s ease-in-out; /* Fade out this image */
+}
+
+#loading-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    height: 100px;
+    z-index: 1002;
+    opacity: 0; /* Start invisible */
+    transition: transform 1.5s ease-in-out,
+                top 1.5s ease-in-out,
+                left 1.5s ease-in-out,
+                height 1.5s ease-in-out,
+                opacity 1.5s ease-in-out;
+}
+
+#loading-logo.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+#loading-image.loaded {
+    opacity: 0;
+}
+
+#loading-logo.moved {
+    top: 65px; /* Final top position */
+    left: 65px; /* Final left position */
+    transform: translate(0, 0) scale(1);
+    height: 70px; /* Final size */
+    opacity: 1; /* Ensure it stays visible */
+}
+
+#main-content {
+    position: relative; /* Ensure it's in the flow */
+    z-index: 999; /* Below loading screen initially */
+    opacity: 1; /* Initially hidden */
+    transition: opacity 1.5s ease-in-out;
+}
+
+#main-content.visible {
+    opacity: 1;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .logo {
         height: 70px;
     }
 
-    .hero-text-container {
-        top: 20%; /* Adjust vertical position on smaller screens */
-        left: 20px;
-    }
-
     .hero-heading {
-        font-size: 2em;
+        font-size: 3.5em;
     }
 
     .hero-subheading {
-        font-size: 1em;
-    }
-
-    .floating-cards-container {
-        bottom: 10px;
-        right: 10px;
-        gap: 10px;
+        font-size: 1.2em;
     }
 
     .floating-card {
-        width: 120px; /* Adjust card width */
-        height: 120px; /* Adjust height */
+        width: calc(80vw / 2);
     }
 }
