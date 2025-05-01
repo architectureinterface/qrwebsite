@@ -115,6 +115,7 @@ header {
     position: fixed;
     width: 80vw;             /* 80% of viewport width */
     height: 35vh;            /* 35% of viewport height */
+    left: 50%;               /* Move horizontal center to middle */
     bottom: 7%;            /* 7% from the bottom of the screen */
     transform: translateX(-50%); /* Center horizontally only */
     max-width: 80vw;        /* Prevent overflow */
