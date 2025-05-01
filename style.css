@@ -28,10 +28,6 @@ header {
             height: 70px; /* Final logo size */
         }
 
-        
-
-        
-
 
 /* Hero Section */
 .hero {
@@ -311,6 +307,15 @@ header {
     transform: translate(0, 0) scale(1);
     height: 70px; /* Final size */
     opacity: 1; /* Ensure it stays visible */
+}
+
+/* Add this for mobile responsiveness */
+@media (max-width: 600px) {
+  #loading-logo.moved {
+    top: 20px;
+    left: 20px;
+    height: 50px; /* Optional: slightly smaller logo on mobile */
+  }
 }
 
 #main-content {
