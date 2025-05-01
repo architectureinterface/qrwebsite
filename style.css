@@ -23,6 +23,16 @@ header {
     height: 90px; /* Bigger logo */
 }
 
+
+        .logo {
+            height: 70px; /* Final logo size */
+        }
+
+        
+
+        
+
+
 /* Hero Section */
 .hero {
     position: relative;
@@ -30,21 +40,27 @@ header {
     display: flex;
     align-items: center; /* Vertically align text container */
     overflow: hidden; /* Clip the zoomed image */
+    padding-top: 90px; /* Add padding to avoid overlap with fixed header */
+
 }
 
+
+
 .hero-image {
-    position: fixed; /* Fixed positioning to cover the entire screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('background.jpg'); /* Replace with your background image */
-    background-size: cover;
-    background-position: center;
-    transform: scale(1.1); /* Initial slight zoom */
-    animation: zoomOut 5s ease-out forwards;
-    z-index: 1; /* Place it behind other content */
-}
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.1);
+            animation: zoomOut 8s ease-out forwards;
+            z-index: -1;
+            opacity: 1; /* Initially visible */
+        }
+
 
 @keyframes zoomOut {
     to {
@@ -158,30 +174,27 @@ header {
 
 /* Modal and other modal related styles */
 
-#modal-backdrop {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.5s ease;
-  z-index: 999;
-  display: none;
+
+
+.modal-content {
+  padding: 2rem;
+  max-height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
-#modal-backdrop.active {
-  background: rgba(0, 0, 0, 0.6);
-  display: block;
-}
 
-#modal-view {
+ .modal-view {
   position: fixed;
-  background: #fff;
+  z-index: 1000;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  background-color: white;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  transition: all 0.7s ease;
-  z-index: 1001;
   display: none;
+  transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1); /* smoother easing */
+
 }
 
 #modal-view.open {
@@ -193,11 +206,35 @@ header {
   overflow-y: auto;
 }
 
-.modal-content {
-  padding: 2rem;
-  max-height: 100%;
-  overflow-y: auto;
-  box-sizing: border-box;
+
+#modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+  z-index: 999;
+  display: none;
+}
+
+
+#modal-backdrop.active {
+  background: rgba(0, 0, 0, 0.6);
+  display: block;
+}
+
+
+.modal-view .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff5f5f;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .close-button {
