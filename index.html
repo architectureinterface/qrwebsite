@@ -12,95 +12,71 @@
         body {
             margin: 0;
             font-family: 'Roboto',
-            overflow-x: hidden; /* Prevent horizontal scrollbar */
-            background-color: #000000; /* Your website's background color */
+            overflow-x: hidden;
+            background-color: #000000;
         }
 
         header {
-            position: fixed; /* Ensure fixed positioning */
-            top: 0; /* Align to the top */
-            left: 0; /* Align to the left */
+            position: fixed;
+            top: 0;
+            left: 0;
             z-index: 10;
-            height: 90px; /* Height of the header */
-            width: 100%; /* Full width */
+            height: 90px;
+            width: 100%;
             display: flex;
-            align-items: center; /* Vertically center content */
-            padding-left: 30px; /* Left padding for the logo */
-            opacity: 1; /* Make header visible from the start */
+            align-items: center;
+            padding-left: 30px;
+            opacity: 1;
         }
-
     </style>
 </head>
 <body style="font-family: 'HelveticaNeueMedium', sans-serif;">
     <div id="loading-container">
     </div>
-
-        <img id="loading-image" src="loading-background.jpg" alt="Loading Background">
-        <img id="loading-logo" src="logo.png" alt="Logo" class="logo">
-
-        <div id="main-content">
-                <header>
-                </header>
-
-                <main class="hero">
-                    <div class="hero-image-wrapper">
-                        <div class="hero-image"></div>
+    <img id="loading-image" src="loading-background.jpg" alt="Loading Background">
+    <img id="loading-logo" src="logo.png" alt="Logo" class="logo">
+    <div id="main-content">
+        <header>
+        </header>
+        <main class="hero">
+            <div class="hero-image-wrapper">
+                <div class="hero-image"></div>
+            </div>
+            <div class="hero-text-container">
+                <h1 class="hero-heading">Curated Spaces. Personalised Luxury</h1>
+                <p class="hero-subheading">Subtext</p>
+            </div>
+        </main>
+        <div class="floating-cards-container visible">
+            <div class="floating-card">
+                <div class="card-content">
+                    <div class="left-column">
+                        <img src="about-us.jpg" alt="About Us">
                     </div>
-                    <div class="hero-text-container">
-                        <h1 class="hero-heading">Curated Spaces. Personalised Luxury</h1>
-                        <p class="hero-subheading">Subtext</p>
+                    <div class="right-column">
+                        <div class="card-heading">About Us</div>
+                        <div class="card-text">Learn more about our mission and story.</div>
                     </div>
-                </main>
-
-                <div class="floating-cards-container visible">
-        <!-- About Us Card -->
-        <div class="floating-card">
-        <div class="card-content">
-            <!-- Left Column (Image) -->
-            <div class="left-column">
-            <img src="about-us.jpg" alt="About Us">
+                </div>
             </div>
-            
-            <!-- Right Column (Text) -->
-            <div class="right-column">
-            <div class="card-heading">About Us</div>
-            <div class="card-text">Learn more about our mission and story.</div>
+            <div class="floating-card">
+                <div class="card-content">
+                    <div class="left-column">
+                        <img src="contact-us.jpg" alt="Contact Us">
+                    </div>
+                    <div class="right-column">
+                        <div class="card-heading">Contact Us</div>
+                        <div class="card-text">Reach out to us for any inquiries or support.</div>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-
-        <!-- Contact Us Card -->
-        <div class="floating-card">
-        <div class="card-content">
-            <!-- Left Column (Image) -->
-            <div class="left-column">
-            <img src="contact-us.jpg" alt="Contact Us">
-            </div>
-            
-            <!-- Right Column (Text) -->
-            <div class="right-column">
-            <div class="card-heading">Contact Us</div>
-            <div class="card-text">Reach out to us for any inquiries or support.</div>
-            </div>
-        </div>
-        </div>
-
-</div>
-
-
-
     </div>
-
     <div id="modal-view" class="modal-view">
-  <button class="close-button">Close</button>
-  <div class="modal-content"></div>
-</div>
+        <button class="close-button">Close</button>
+        <div class="modal-content"></div>
     </div>
     <div id="modal-backdrop"></div>
-<div id="modal-view" class="modal-view">
-  <button class="close-button">Close</button>
-  <div class="modal-content"></div>
-</div>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
