@@ -109,19 +109,22 @@ header {
   z-index: 9999;   
 }
 
-/* Mobile responsiveness */
 @media (max-width: 600px) {
   .floating-cards-container {
     position: fixed;
-    width: 80vw;             /* 80% of viewport width */
-    height: 35vh;            /* 35% of viewport height */
-    left: 50%;               /* Move horizontal center to middle */
-    bottom: 7%;            /* 7% from the bottom of the screen */
-    transform: translateX(-50%); /* Center horizontally only */
-    max-width: 80vw;        /* Prevent overflow */
-    max-height: 35vh;       /* Prevent overflow */
+    width: 80vw;
+    height: 35vh;
+    left: 50%;
+    bottom: 7%;
+    transform: translateX(-50%);
+    max-width: 80vw;
+    max-height: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally within the container */
   }
 }
+
 
 .floating-cards-container.visible {
   opacity: 1;
