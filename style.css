@@ -111,11 +111,12 @@ header {
 /* Mobile responsiveness */
 @media (max-width: 600px) {
   .floating-card-container {
-    width: 80vw;         /* 80% of screen width */
-    height: 35vh;        /* 35% of screen height */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centered on screen */
+    position: absolute;
+    width: 80vw;             /* 80% of viewport width */
+    height: 35vh;            /* 35% of viewport height */
+    left: 50%;               /* Move horizontal center to middle */
+    bottom: 7%;            /* 7% from the bottom of the screen */
+    transform: translateX(-50%); /* Center horizontally only */
   }
 }
 
