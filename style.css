@@ -110,7 +110,7 @@ header {
 
 /* Mobile responsiveness */
 @media (max-width: 600px) {
-  .floating-card-container {
+  .floating-cards-container {
     position: absolute;
     width: 80vw;             /* 80% of viewport width */
     height: 35vh;            /* 35% of viewport height */
