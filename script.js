@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalContent = modal.querySelector('.modal-content');
     const modalCloseBtn = modal.querySelector('.close-button');
 
-    const logoFadeInPopOutTime = 1600;
-    const logoMoveTime = 1600;
+    const logoFadeInPopOutTime =2500;
+    const logoMoveTime = 2100;
 
     function setVh() {
         let vh = window.innerHeight * 0.01;
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       window.addEventListener('resize', setVh);
       setVh();
-      
+
 
     setTimeout(() => {
         loadingLogo.classList.add('visible');
