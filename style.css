@@ -121,8 +121,8 @@ header {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 40vh; /* Fixed container height */
-  width: 15vw;
+  height: calc(var(--vh, 1vh) * 40); /* Fixed container height */
+  width: calc(var(--vh, 1vh) * 25);;
   opacity: 0;
   transition: opacity 1.5s ease-in-out 1s;
   box-sizing: border-box;
@@ -132,13 +132,13 @@ header {
 @media (max-width: 600px) {
   .floating-cards-container {
     position: fixed;
-    width: 80vw;
-    height: 35vh;
+    width: calc(var(--vh, 1vh) * 80);
+    height: calc(var(--vh, 1vh) * 35);
     left: 50%;
     bottom: 7%;
     transform: translateX(-50%);
-    max-width: 80vw;
-    max-height: 35vh;
+    max-width: calc(var(--vh, 1vh) * 80);
+    max-height: calc(var(--vh, 1vh) * 35);
     display: flex;
     flex-direction: column;
     align-items: center; /* Center items horizontally within the container */
