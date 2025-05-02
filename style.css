@@ -1,18 +1,16 @@
 
 /* General Body Styles */
 body, html {
-
   margin: 0;
   padding: 0;
-  overflow-x: hidden;  /* Prevent both vertical and horizontal scroll */
+  overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);
   width: 100dvw;
-  transform: translateZ(0); /* Forces hardware acceleration */
+  transform: translateZ(0);
   backface-visibility: hidden;
   scrollbar-gutter: stable;
-
-
-  
+  font-family: 'Roboto', sans-serif;
+  background-color: #000000;
 }
 
 *, *::before, *::after {
@@ -27,20 +25,10 @@ header {
     z-index: 10; /* Ensure logo is on top */
 }
 
-.logo {
-    height: 90px; /* Bigger logo */
-}
 
 
         .logo {
             height: 70px; /* Final logo size */
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Roboto',
-            overflow-x: hidden;
-            background-color: #000000;
         }
 
         header {
@@ -313,11 +301,12 @@ header {
   justify-content: center;
   align-items: center;
   background-color: black;
+  transition: opacity 1s ease;
+
 }
 
 #loading-container.loaded {
     opacity: 0;
-    visibility: hidden;
 }
 
 #loading-image {
@@ -334,24 +323,24 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  transform: translate(50vw, 50vh) scale(0);
+  transform: translate(calc(50vw - 50%), calc(var(--vh, 1vh) * 50 - 50%)) scale(0);
   transform-origin: center center;
   opacity: 0;
   z-index: 1002;
   max-width: 200px;
   height: auto;
   transition:
-    transform 1.5s ease-in-out,
-    opacity 1.5s ease-in-out;
+    transform 2.2s ease,
+    opacity 2.2s ease;
 }
 
 #loading-logo.visible {
   opacity: 1;
-  transform: translate(50vw, 50vh) scale(1.6); /* Grows in center */
+  transform: translate(calc(50vw - 50%), calc(var(--vh, 1vh) * 50 - 50%)) scale(1.6);
 }
 
 #loading-logo.moved {
-  transform: translate(65px, 65px) scale(1); /* Glides to corner */
+  transform: translate(65px, 65px) scale(1);
   opacity: 1;
 }
 
