@@ -1,10 +1,16 @@
+
 /* General Body Styles */
 body, html {
+
   margin: 0;
   padding: 0;
   overflow: hidden;  /* Prevent both vertical and horizontal scroll */
-  height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100dvw;
+  transform: translateZ(0); /* Forces hardware acceleration */
+  backface-visibility: hidden;
+
+  
 }
 
 *, *::before, *::after {
@@ -28,7 +34,25 @@ header {
             height: 70px; /* Final logo size */
         }
 
+        body {
+            margin: 0;
+            font-family: 'Roboto',
+            overflow-x: hidden;
+            background-color: #000000;
+        }
 
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            height: 90px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            opacity: 1;
+        }
 /* Hero Section */
 .hero {
     position: relative;
@@ -138,12 +162,14 @@ header {
 
 .floating-card {
   display: flex;
-  flex: 1 1 0; /* Grow equally to fill container height */
-  max-width: 600px;
+  flex: 1 1 0; /* Grow equally to fill available space */
+  width: 100%; /* Fill full width of the container */
+  height: 50%;
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Important to include padding/border inside width */
 }
 
 .card-content {
@@ -156,6 +182,7 @@ header {
 .left-column {
   flex: 1 1 40%;
   overflow: hidden;
+  z-index: 10;
 }
 
 .left-column img {
@@ -274,15 +301,16 @@ header {
 
 /* Loading Screen Styles */
 #loading-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000000; /* Or your loading screen background color */
-    z-index: 1000;
-    opacity: 1; /* Initially visible */
-    transition: opacity 1.5s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
 }
 
 #loading-container.loaded {
@@ -291,15 +319,13 @@ header {
 }
 
 #loading-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1001;
-    opacity: 1; /* Initially visible */
-    transition: opacity 2s ease-in-out; /* Fade out this image */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 #loading-logo {
@@ -309,6 +335,9 @@ header {
     transform: translate(-50%, -50%) scale(0);
     height: 100px;
     z-index: 1002;
+    max-width: 200px;
+    height: auto;
+
     opacity: 0; /* Start invisible */
     transition: transform 1.5s ease-in-out,
                 top 1.5s ease-in-out,
