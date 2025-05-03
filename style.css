@@ -201,6 +201,7 @@ header {
   transition: opacity 1.5s ease-in-out 1s;
   box-sizing: border-box;
   z-index: 9999;   
+  align-items: stretch;
 }
 
 @media (max-width: 600px) {
@@ -217,7 +218,7 @@ header {
     justify-content: space-between;
 
     flex-direction: column;
-    align-items: center; /* Center items horizontally within the container */
+    align-items: stretch; /* Center items horizontally within the container */
   }
 }
 
@@ -233,20 +234,17 @@ header {
 }
 
 .floating-card {
-  margin:0;
-  padding:0;
-  display: flex;
-  flex: 1 1 0; /* Grow equally to fill available space */
-  width: 100%; /* Fill full width of the container */
-  height: 50%;
+   margin: 0;
+  padding: 0;
+  width: 100%; /* Ensure it tries to take full container width */
+  height: 50%; /* Maintain the half height */
   max-width: 100%;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent shrinking below 100% width */
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box; /* Important to include padding/border inside width */
-  outline: 1px solid blue;
+  box-sizing: border-box;
 }
 
 .card-content {
@@ -402,9 +400,5 @@ header {
 
     .hero-subheading {
         font-size: 1.2em;
-    }
-
-    .floating-card {
-        width: calc(80vw / 2);
     }
 }
