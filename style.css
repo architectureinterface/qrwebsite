@@ -377,9 +377,6 @@ header {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .logo {
-        height: 70px;
-    }
 
     .hero-heading {
         font-size: 3.5em;
@@ -389,7 +386,4 @@ header {
         font-size: 1.2em;
     }
 
-    .floating-card {
-        width: calc(80vw / 2);
-    }
 }
