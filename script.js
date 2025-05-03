@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.setProperty('--vh', `${vh}px`);
         document.documentElement.style.setProperty('--vw', `${vw}px`);
       }
-      
+    
+      document.addEventListener('DOMContentLoaded', setViewportUnits);
       window.addEventListener('resize', setViewportUnits);
-      window.addEventListener('load', setViewportUnits);
 
 
     setTimeout(() => {

@@ -205,8 +205,8 @@ header {
 
 @media (max-width: 600px) {
   .floating-cards-container {
-    position: fixed;
-    width: calc(var(--vw, 1vw) * 80);
+    width: 80vw; /* fallback */
+    width: calc(var(--vw, 1vw) * 80); /* preferred */
     height: calc(var(--vh, 1vh) * 35);
     left: 50%;
     bottom: 7%;
@@ -238,6 +238,7 @@ header {
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box; /* Important to include padding/border inside width */
+  outline: 1px solid blue;
 }
 
 .card-content {
