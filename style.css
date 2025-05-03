@@ -92,13 +92,10 @@ header {
 }
 
 /* Optional: Responsive */
-@media (max-width: 768px) {
-    .hero-image-wrapper {
-        height: 250px;
-    }
+@media (max-width: 600px) {
 
     .hero-logo {
-        width: 100px;
+        transform: translate(20px, 20px) scale(1);
     }
 }
 
