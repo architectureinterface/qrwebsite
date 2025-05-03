@@ -30,6 +30,36 @@ header {
   opacity: 1;
         }
 
+  /* Loading Screen Styles */
+#loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  transition: opacity 1s ease;
+
+}
+
+#loading-container.loaded {
+    opacity: 0;
+}
+
+#loading-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
 #loading-logo {
   position: absolute;
   top: 0;
@@ -83,9 +113,8 @@ header {
 
 .hero-logo {
     position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(65px, 65px) scale(1);
+    top: 65px;
+    left: 65px;
     max-width: 200px;
     height: auto;
     z-index: 2;
@@ -95,7 +124,8 @@ header {
 @media (max-width: 600px) {
 
     .hero-logo {
-        transform: translate(20px, 20px) scale(1);
+        top: 20px;
+        left: 20px;
     }
 }
 
@@ -333,35 +363,7 @@ header {
   z-index: 1002;
 }
 
-/* Loading Screen Styles */
-#loading-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  transition: opacity 1s ease;
 
-}
-
-#loading-container.loaded {
-    opacity: 0;
-}
-
-#loading-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
 
 
 #main-content {
