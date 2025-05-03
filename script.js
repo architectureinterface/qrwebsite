@@ -1,5 +1,4 @@
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const loadingContainer = document.getElementById('loading-container');
     const loadingImage = document.getElementById('loading-image');
     const loadingLogo = document.getElementById('loading-logo');
@@ -14,19 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalContent = modal.querySelector('.modal-content');
     const modalCloseBtn = modal.querySelector('.close-button');
 
-    const logoFadeInPopOutTime =2500;
-    const logoMoveTime = 1300;
+    const logoFadeInPopOutTime = 2500;
+    const logoMoveTime = 900;
 
     function setViewportUnits() {
         const vh = window.innerHeight * 0.01;
-        const vw = window.innerWidth  * 0.01;
+        const vw = window.innerWidth * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
         document.documentElement.style.setProperty('--vw', `${vw}px`);
-      }
-    
-      document.addEventListener('DOMContentLoaded', setViewportUnits);
-      window.addEventListener('resize', setViewportUnits);
+    }
 
+    setViewportUnits();
+    window.addEventListener('resize', setViewportUnits);
 
     setTimeout(() => {
         loadingLogo.classList.add('visible');
@@ -62,96 +60,104 @@ document.addEventListener('DOMContentLoaded', function() {
                 // CLOSE MODAL CONTAINER
                 function closeModal(modal) {
                     if (modal) {
-                        modal.style.display = 'none';
+                        modalContent.innerHTML = '';
+                        modal.classList.remove('open');
+                        setTimeout(() => {
+                            modal.style.display = 'none';
+                            modal.style.top = '';
+                            modal.style.left = '';
+                            modal.style.width = '';
+                            modal.style.height = '';
+                        }, 300);
                     }
                 }
 
                 if (aboutUsCard) {
-                    aboutUsCard.addEventListener('click', function() {
+                    aboutUsCard.addEventListener('click', function () {
                         const modalId = this.getAttribute('data-modal');
                         openModal(modalId);
                     });
                 }
 
                 if (contactUsCard) {
-                    contactUsCard.addEventListener('click', function() {
+                    contactUsCard.addEventListener('click', function () {
                         const modalId = this.getAttribute('data-modal');
                         openModal(modalId);
                     });
                 }
 
                 closeButtons.forEach(button => {
-                    button.addEventListener('click', function() {
+                    button.addEventListener('click', function () {
                         const modal = this.closest('.modal-container');
                         closeModal(modal);
                     });
                 });
 
-                // Floating Card -> Modal Transition
-                 // Floating Card Click
-                 document.querySelectorAll('.floating-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const rect = card.getBoundingClientRect();
+                // Floating Card to Modal Transition
+                document.querySelectorAll('.floating-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const rect = card.getBoundingClientRect();
 
-      // Set initial position & size to match clicked card
-      modal.style.display = 'block';
-      modal.style.top = `${rect.top}px`;
-      modal.style.left = `${rect.left}px`;
-      modal.style.width = `${rect.width}px`;
-      modal.style.height = `${rect.height}px`;
-      modal.style.transform = 'none';
+                        modalContent.innerHTML = '';
+                        modal.style.display = 'block';
+                        modal.style.top = `${rect.top}px`;
+                        modal.style.left = `${rect.left}px`;
+                        modal.style.width = `${rect.width}px`;
+                        modal.style.height = `${rect.height}px`;
+                        modal.style.transform = 'none';
 
-      // Force next frame before transitioning
-      requestAnimationFrame(() => {
-  modal.classList.add('open');
-  modalContent.innerHTML = `
-    <h2>Expanded Card</h2>
-    <p>This is dummy content replacing the card's original text. Add anything here to simulate expanded view.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae sapien vel nisi convallis commodo.</p>
-  `;
-  setupClickOutsideToClose(); // 🔥 Attach outside click listener safely
-});
-    });
-  });
+                        requestAnimationFrame(() => {
+                            modal.classList.add('open');
 
-  modalCloseBtn.addEventListener('click', () => {
-    modal.classList.remove('open');
+                            const handleTransitionEnd = () => {
+                                const title = card.getAttribute('data-title') || 'Default Title';
+                                const text = card.getAttribute('data-text') || 'Default text goes here.';
+                                modalContent.innerHTML = `
+                                    <h2>${title}</h2>
+                                    <p>${text}</p>
+                                `;
+                                modal.removeEventListener('transitionend', handleTransitionEnd);
+                            };
 
-    // Hide modal and clear content after animation
-    modal.addEventListener('transitionend', function handler() {
-      modal.style.display = 'none';
-      modalContent.innerHTML = '';
-      modal.removeEventListener('transitionend', handler);
-    }, { once: true });
-  });
+                            modal.addEventListener('transitionend', handleTransitionEnd);
+                            setupClickOutsideToClose();
+                        });
+                    });
+                });
 
-  // Click outside modal-content to close modal
-function setupClickOutsideToClose() {
-    function outsideClickHandler(event) {
-        // If the modal is open and click is outside the content
-        if (
-            modal.style.display === 'block' &&
-            modal.classList.contains('open') &&
-            !modalContent.contains(event.target)
-        ) {
-            modal.classList.remove('open');
-            modal.addEventListener('transitionend', function handler() {
-                modal.style.display = 'none';
-                modalContent.innerHTML = '';
-                document.removeEventListener('click', outsideClickHandler);
-                modal.removeEventListener('transitionend', handler);
-            }, { once: true });
-        }
-    }
+                // Modal close button
+                modalCloseBtn.addEventListener('click', () => {
+                    modal.classList.remove('open');
 
+                    modal.addEventListener('transitionend', function handler() {
+                        modal.style.display = 'none';
+                        modalContent.innerHTML = '';
+                        modal.removeEventListener('transitionend', handler);
+                    }, { once: true });
+                });
 
-    // Add listener slightly delayed to avoid conflicting with initial card click
-    setTimeout(() => {
-        document.addEventListener('click', outsideClickHandler);
-    }, 100);
-}
+                // Close modal when clicking outside content
+                function setupClickOutsideToClose() {
+                    function outsideClickHandler(event) {
+                        if (
+                            modal.style.display === 'block' &&
+                            modal.classList.contains('open') &&
+                            !modalContent.contains(event.target)
+                        ) {
+                            modal.classList.remove('open');
+                            modal.addEventListener('transitionend', function handler() {
+                                modal.style.display = 'none';
+                                modalContent.innerHTML = '';
+                                document.removeEventListener('click', outsideClickHandler);
+                                modal.removeEventListener('transitionend', handler);
+                            }, { once: true });
+                        }
+                    }
 
-
+                    setTimeout(() => {
+                        document.addEventListener('click', outsideClickHandler);
+                    }, 100);
+                }
 
             }, logoMoveTime);
         }, logoFadeInPopOutTime);

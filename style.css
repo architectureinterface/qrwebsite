@@ -24,7 +24,7 @@ header {
   z-index: 10;
   height: 90px;
   width: 100%;
-  display: flex;
+  display: flex;  
   align-items: center;
   padding-left: 30px;
   opacity: 1;
@@ -154,10 +154,11 @@ header {
     position: absolute;
     top: 30%;
     left: 65px;
+    padding-right: 20px; 
     color: #fff;
     font-family: 'Roboto', sans-serif; /* Using Roboto */
     font-style: normal; /* Apply italic style */
-    font-weight: 300; /* Apply light weight */
+    font-weight: 200; /* Apply light weight */
     z-index: 2;
     text-align: left;
     width: auto;
@@ -190,7 +191,7 @@ header {
 /* Container for all floating cards */
 .floating-cards-container {
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   right: 65px;
   display: flex;
   flex-direction: column;
