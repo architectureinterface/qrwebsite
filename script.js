@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalCloseBtn = modal.querySelector('.close-button');
 
     const logoFadeInPopOutTime =2500;
-    const logoMoveTime = 900;
+    const logoMoveTime = 1300;
 
     function setViewportUnits() {
         const vh = window.innerHeight * 0.01;

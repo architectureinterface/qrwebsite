@@ -30,36 +30,6 @@ header {
   opacity: 1;
         }
 
-  /* Loading Screen Styles */
-#loading-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  transition: opacity 1s ease;
-
-}
-
-#loading-container.loaded {
-    opacity: 0;
-}
-
-#loading-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
 #loading-logo {
   position: absolute;
   top: 0;
@@ -113,8 +83,9 @@ header {
 
 .hero-logo {
     position: absolute;
-    top: 65px;
-    left: 65px;
+    top: 0;
+    left: 0;
+    transform: translate(65px, 65px) scale(1);
     max-width: 200px;
     height: auto;
     z-index: 2;
@@ -124,8 +95,7 @@ header {
 @media (max-width: 600px) {
 
     .hero-logo {
-        top: 20px;
-        left: 20px;
+        transform: translate(20px, 20px) scale(1);
     }
 }
 
@@ -196,29 +166,26 @@ header {
   flex-direction: column;
   gap: 20px;
   height: calc(var(--vh, 1vh) * 40); /* Fixed container height */
-  width: calc(var(--vw, 1vw) * 25);;
+  width: calc(var(--vh, 1vh) * 25);;
   opacity: 0;
   transition: opacity 1.5s ease-in-out 1s;
   box-sizing: border-box;
   z-index: 9999;   
-  align-items: stretch;
 }
 
 @media (max-width: 600px) {
   .floating-cards-container {
-    width: 100%; /* fallback */
-    width: calc(var(--vw, 1vw) * 80); /* preferred */
+    position: fixed;
+    width: calc(var(--vh, 1vh) * 80);
     height: calc(var(--vh, 1vh) * 35);
     left: 50%;
     bottom: 7%;
     transform: translateX(-50%);
-    max-width: calc(var(--vw, 1vw) * 80);
+    max-width: calc(var(--vh, 1vh) * 80);
     max-height: calc(var(--vh, 1vh) * 35);
     display: flex;
-    justify-content: space-between;
-
     flex-direction: column;
-    align-items: stretch; /* Center items horizontally within the container */
+    align-items: center; /* Center items horizontally within the container */
   }
 }
 
@@ -227,24 +194,16 @@ header {
   opacity: 1;
 }
 
-.container::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 .floating-card {
-   margin: 0;
-  padding: 0;
-  width: 100%; /* Ensure it tries to take full container width */
-  height: 50%; /* Maintain the half height */
-  max-width: 100%;
-  flex-shrink: 0; /* Prevent shrinking below 100% width */
+  display: flex;
+  flex: 1 1 0; /* Grow equally to fill available space */
+  width: 100%; /* Fill full width of the container */
+  height: 50%;
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
+  box-sizing: border-box; /* Important to include padding/border inside width */
 }
 
 .card-content {
@@ -374,7 +333,35 @@ header {
   z-index: 1002;
 }
 
+/* Loading Screen Styles */
+#loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  transition: opacity 1s ease;
 
+}
+
+#loading-container.loaded {
+    opacity: 0;
+}
+
+#loading-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
 
 
 #main-content {
@@ -400,5 +387,9 @@ header {
 
     .hero-subheading {
         font-size: 1.2em;
+    }
+
+    .floating-card {
+        width: calc(80vw / 2);
     }
 }
