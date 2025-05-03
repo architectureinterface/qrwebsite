@@ -71,7 +71,7 @@ header {
   max-width: 200px;
   height: auto;
   transition:
-    transform 1.5s ease,
+    transform 0.8s ease,
     opacity 1.5s ease;
 }
 

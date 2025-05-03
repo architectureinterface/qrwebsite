@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalCloseBtn = modal.querySelector('.close-button');
 
     const logoFadeInPopOutTime =2500;
-    const logoMoveTime = 1600;
+    const logoMoveTime = 900;
 
     function setViewportUnits() {
         const vh = window.innerHeight * 0.01;
@@ -143,31 +143,6 @@ function setupClickOutsideToClose() {
             }, { once: true });
         }
     }
-
-    // Click outside modal-content to close modal
-function setupClickOutsideToClose() {
-    function outsideClickHandler(event) {
-        // If the modal is open and click is outside the content
-        if (
-            modal.style.display === 'block' &&
-            modal.classList.contains('open') &&
-            !modalContent.contains(event.target)
-        ) {
-            modal.classList.remove('open');
-            modal.addEventListener('transitionend', function handler() {
-                modal.style.display = 'none';
-                modalContent.innerHTML = '';
-                document.removeEventListener('click', outsideClickHandler);
-                modal.removeEventListener('transitionend', handler);
-            }, { once: true });
-        }
-    }
-
-    // Add listener slightly delayed to avoid conflicting with initial card click
-    setTimeout(() => {
-        document.addEventListener('click', outsideClickHandler);
-    }, 100);
-}
 
 
     // Add listener slightly delayed to avoid conflicting with initial card click
