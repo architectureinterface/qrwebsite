@@ -92,7 +92,7 @@ header {
 }
 
 /* Optional: Responsive */
-@media (max-width: 600px) {
+@media (max-width: px) {
 
     .hero-logo {
         transform: translate(20px, 20px) scale(1);
@@ -131,6 +131,14 @@ header {
     z-index: 2;
     text-align: left;
     width: auto;
+}
+
+@media (max-width: 600px) {
+  .hero-text-container {
+    top: 15%;
+    font-weight: 200;
+
+  }
 }
 
 .hero-heading {
