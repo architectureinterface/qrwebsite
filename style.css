@@ -64,7 +64,7 @@ header {
 /* Hero Section */
 .hero {
     position: relative;
-    height: 100dvh; /* Full screen height */
+    height: 100vh; /* Full screen height */
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -75,8 +75,8 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100dvw;
-  height: 100dvh;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden; /* ✅ Important */
   z-index: -2; /* behind everything else */
 }
@@ -86,13 +86,13 @@ header {
     top: 0;
     left: 0;
     transform: translate(65px, 65px) scale(1);
-    width: 200px; /* Adjust as needed */
+    max-width: 200px;
     height: auto;
     z-index: 2;
 }
 
 /* Optional: Responsive */
-@media (max-width: px) {
+@media (max-width: 600px) {
 
     .hero-logo {
         transform: translate(20px, 20px) scale(1);
@@ -136,7 +136,7 @@ header {
 @media (max-width: 600px) {
   .hero-text-container {
     top: 15%;
-    font-weight: 200;
+    font-weight: 150;
 
   }
 }
