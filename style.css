@@ -71,8 +71,8 @@ header {
   max-width: 200px;
   height: auto;
   transition:
-    transform 2.2s ease,
-    opacity 2.2s ease;
+    transform 1.5s ease,
+    opacity 1.5s ease;
 }
 
 #loading-logo.visible {
