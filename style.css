@@ -10,6 +10,7 @@ body, html {
   backface-visibility: hidden;
   scrollbar-gutter: stable;
   font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   background-color: #000000;
 }
 
@@ -87,7 +88,7 @@ header {
 
 @media (max-width: 600px) {
   #loading-logo.moved {
-    transform: translate(20px, 20px) scale(1);
+  transform: translate(calc(var(--vw, 1vw) * 50 - 50%), calc(var(--vh, 1vh) * 10 - 50%)) scale(0.8);
   }
 }
 
@@ -124,8 +125,12 @@ header {
 @media (max-width: 600px) {
 
     .hero-logo {
-        top: 20px;
-        left: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(calc(var(--vw, 1vw) * 50 - 50%), calc(var(--vh, 1vh) * 10 - 50%)) scale(0.8); 
+        transform-origin: center center;
+        z-index: 1002; /* optional: match loading-logo's stacking */
     }
 }
 
@@ -159,28 +164,29 @@ header {
 .hero-text-container {
     position: absolute;
     top: 30%;
-    left: 65px;
-    padding-right: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    
     color: #fff;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: 200;
+    font-weight: 300;
+    
     z-index: 2;
     text-align: left;
-    max-width: calc(100% - 85px); /* prevents overflow */
-    box-sizing: border-box;       /* includes padding in width calc */
-    overflow-wrap: break-word;    /* breaks long words if needed */
-}
 
+    max-width: 90%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+}
 
 @media (max-width: 600px) {
   .hero-text-container {
-    top: 15%;
-    font-weight: 120;
-    left: 20px;
-    right: 20px; /* add this to control horizontal space on small screens */
-    padding-right: 10px;
-    max-width: calc(100% - 40px); /* extra protection on small screens */
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 300;
   }
 }
 
@@ -189,8 +195,10 @@ header {
     margin-top: 0;
     margin-bottom: 10px;
     font-family: 'Roboto', sans-serif; /* Using Roboto */
-    font-weight: 700; /* Apply medium weight */
+    font-weight: 300; /* Apply medium weight */
     font-size: 4.5em;
+    line-height: 1.1;
+    text-align: center;
 }
 
 .hero-subheading {
@@ -221,13 +229,13 @@ header {
 @media (max-width: 600px) {
   .floating-cards-container {
     width: 100%; /* fallback */
-    width: calc(var(--vw, 1vw) * 80); /* preferred */
-    height: calc(var(--vh, 1vh) * 35);
+    width: calc(var(--vw, 1vw) * 60); /* preferred */
+    height: calc(var(--vh, 1vh) * 15);
     left: 50%;
-    bottom: 7%;
+    bottom: 10%;
     transform: translateX(-50%);
-    max-width: calc(var(--vw, 1vw) * 80);
-    max-height: calc(var(--vh, 1vh) * 35);
+    max-width: calc(var(--vw, 1vw) * 60);
+    max-height: calc(var(--vh, 1vh) * 15);
     display: flex;
     justify-content: space-between;
 
@@ -247,58 +255,22 @@ header {
   clear: both;
 }
 
+
+/* The card itself */
 .floating-card {
-   margin: 0;
-  padding: 0;
-  width: 100%; /* Ensure it tries to take full container width */
-  height: 50%; /* Maintain the half height */
-  max-width: 100%;
-  flex-shrink: 0; /* Prevent shrinking below 100% width */
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  overflow: visible; /* <-- Allow oval image to show fully */
+  background-color: transparent; /* Transparent background */
 }
 
-.card-content {
-  display: flex;
-  flex-direction: row;
+.card-full-image {
   width: 100%;
   height: 100%;
-}
-
-.left-column {
-  flex: 1 1 40%;
-  overflow: hidden;
-  z-index: 10;
-}
-
-.left-column img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* <-- Show entire oval image without cropping */
   display: block;
-}
-
-.right-column {
-  flex: 1 1 60%;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.card-heading {
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.card-text {
-  font-size: 0.95em;
-  color: #555;
 }
 
 
