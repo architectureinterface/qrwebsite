@@ -156,21 +156,28 @@ header {
     left: 65px;
     padding-right: 20px; 
     color: #fff;
-    font-family: 'Roboto', sans-serif; /* Using Roboto */
-    font-style: normal; /* Apply italic style */
-    font-weight: 200; /* Apply light weight */
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 200;
     z-index: 2;
     text-align: left;
-    width: auto;
+    max-width: calc(100% - 85px); /* prevents overflow */
+    box-sizing: border-box;       /* includes padding in width calc */
+    overflow-wrap: break-word;    /* breaks long words if needed */
 }
+
 
 @media (max-width: 600px) {
   .hero-text-container {
     top: 15%;
     font-weight: 150;
-
+    left: 20px;
+    right: 20px; /* add this to control horizontal space on small screens */
+    padding-right: 10px;
+    max-width: calc(100% - 40px); /* extra protection on small screens */
   }
 }
+
 
 .hero-heading {
     margin-top: 0;
