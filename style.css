@@ -234,13 +234,13 @@ header {
 /* Container for all floating cards */
 .floating-cards-container {
   position: fixed;
-  bottom: 65px;
+  bottom: 30px;
   right: 65px;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  height: 25vh; /* Fixed container height */
-  width: 25vw;
+  width: calc(var(--vw, 1vw) * 20); /* preferred */
+  height: calc(var(--vh, 1vh) * 30);
   opacity: 0;
   transition: opacity 1.5s ease-in-out 1s;
   box-sizing: border-box;
@@ -349,8 +349,8 @@ header {
 #modal-view.open {
   top: 50% !important;
   left: 50% !important;
-  width: 90vw !important;
-  height: 80vh !important;
+  width: 40vw !important;
+  height: 60vh !important;
   transform: translate(-50%, -40%) !important;
   overflow-y: auto;
   background: rgba(255, 255, 255, 0.7);
