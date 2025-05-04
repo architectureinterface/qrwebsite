@@ -2,11 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadingContainer = document.getElementById('loading-container');
     const loadingImage = document.getElementById('loading-image');
     const loadingLogo = document.getElementById('loading-logo');
-    const mainHeader = document.querySelector('header');
     const mainContent = document.getElementById('main-content');
     const floatingCardsContainer = document.querySelector('.floating-cards-container');
-    const closeButtons = document.querySelectorAll('.close-button');
-    const modalContainers = document.querySelectorAll('.modal-container');
 
     const backdrop = document.getElementById('modal-backdrop');
     const modal = document.getElementById('modal-view');
@@ -26,12 +23,11 @@ document.addEventListener('DOMContentLoaded', function () {
     setViewportUnits();
     window.addEventListener('resize', setViewportUnits);
 
+    // Main loading animation
     setTimeout(() => {
         loadingLogo.classList.add('visible');
-
         setTimeout(() => {
             loadingLogo.classList.add('moved');
-
             setTimeout(() => {
                 loadingContainer.classList.add('loaded');
                 loadingImage.classList.add('loaded');
@@ -44,120 +40,88 @@ document.addEventListener('DOMContentLoaded', function () {
                     loadingContainer.remove();
                 }, 2000);
 
-                const aboutUsCard = document.querySelector('.about-us-card');
-                const contactUsCard = document.querySelector('.contact-us-card');
+                // OPEN MODAL
+                function openModal({ title = 'Default Title', text = 'Default text goes here.', sourceRect = null }) {
+                    modalContent.innerHTML = '';
+                    modal.style.display = 'block';
 
-                // OPEN MODAL BY ID
-                function openModal(modalId) {
-                    const modal = document.getElementById(modalId);
-                    if (modal) {
-                        modal.style.display = 'flex';
-                    } else {
-                        console.error(`Modal with ID '${modalId}' not found!`);
+                    if (sourceRect) {
+                        modal.style.top = `${sourceRect.top}px`;
+                        modal.style.left = `${sourceRect.left}px`;
+                        modal.style.width = `${sourceRect.width}px`;
+                        modal.style.height = `${sourceRect.height}px`;
                     }
-                }
 
-                // CLOSE MODAL CONTAINER
-                function closeModal(modal) {
-                    if (modal) {
-                        modalContent.innerHTML = '';
-                        modal.classList.remove('open');
-                        setTimeout(() => {
-                            modal.style.display = 'none';
-                            modal.style.top = '';
-                            modal.style.left = '';
-                            modal.style.width = '';
-                            modal.style.height = '';
-                        }, 300);
-                    }
-                }
-
-                if (aboutUsCard) {
-                    aboutUsCard.addEventListener('click', function () {
-                        const modalId = this.getAttribute('data-modal');
-                        openModal(modalId);
+                    requestAnimationFrame(() => {
+                        modal.classList.add('open');
+                        modal.addEventListener('transitionend', function handler() {
+                            modalContent.innerHTML = `
+                                <h2>${title}</h2>
+                                <p>${text}</p>
+                            `;
+                            modal.removeEventListener('transitionend', handler);
+                        }, { once: true });
                     });
                 }
 
-                if (contactUsCard) {
-                    contactUsCard.addEventListener('click', function () {
-                        const modalId = this.getAttribute('data-modal');
-                        openModal(modalId);
-                    });
-                }
-
-                closeButtons.forEach(button => {
-                    button.addEventListener('click', function () {
-                        const modal = this.closest('.modal-container');
-                        closeModal(modal);
-                    });
-                });
-
-                // Floating Card to Modal Transition
-                document.querySelectorAll('.floating-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const rect = card.getBoundingClientRect();
-
-                        modalContent.innerHTML = '';
-                        modal.style.display = 'block';
-                        modal.style.top = `${rect.top}px`;
-                        modal.style.left = `${rect.left}px`;
-                        modal.style.width = `${rect.width}px`;
-                        modal.style.height = `${rect.height}px`;
-                        modal.style.transform = 'none';
-
-                        requestAnimationFrame(() => {
-                            modal.classList.add('open');
-
-                            const handleTransitionEnd = () => {
-                                const title = card.getAttribute('data-title') || 'Default Title';
-                                const text = card.getAttribute('data-text') || 'Default text goes here.';
-                                modalContent.innerHTML = `
-                                    <h2>${title}</h2>
-                                    <p>${text}</p>
-                                `;
-                                modal.removeEventListener('transitionend', handleTransitionEnd);
-                            };
-
-                            modal.addEventListener('transitionend', handleTransitionEnd);
-                            setupClickOutsideToClose();
-                        });
-                    });
-                });
-
-                // Modal close button
-                modalCloseBtn.addEventListener('click', () => {
+                // CLOSE MODAL
+                function closeModal() {
+                    if (!modal.classList.contains('open')) return;
+                
+                    // Clear content BEFORE starting the close transition
+                    modalContent.innerHTML = '';
+                
                     modal.classList.remove('open');
-
+                
                     modal.addEventListener('transitionend', function handler() {
                         modal.style.display = 'none';
-                        modalContent.innerHTML = '';
+                        modal.style.top = '';
+                        modal.style.left = '';
+                        modal.style.width = '';
+                        modal.style.height = '';
                         modal.removeEventListener('transitionend', handler);
                     }, { once: true });
-                });
+                }
+                // Click on modal close button
+                modalCloseBtn.addEventListener('click', closeModal);
 
-                // Close modal when clicking outside content
-                function setupClickOutsideToClose() {
-                    function outsideClickHandler(event) {
-                        if (
-                            modal.style.display === 'block' &&
-                            modal.classList.contains('open') &&
-                            !modalContent.contains(event.target)
-                        ) {
-                            modal.classList.remove('open');
-                            modal.addEventListener('transitionend', function handler() {
-                                modal.style.display = 'none';
-                                modalContent.innerHTML = '';
-                                document.removeEventListener('click', outsideClickHandler);
-                                modal.removeEventListener('transitionend', handler);
-                            }, { once: true });
-                        }
+                // Click inside floating cards container (delegated)
+                document.body.addEventListener('click', function (event) {
+                    const target = event.target;
+
+                    // Handle floating card click
+                    const floatingCard = target.closest('.floating-card');
+                    if (floatingCard) {
+                        const rect = floatingCard.getBoundingClientRect();
+                        const title = floatingCard.getAttribute('data-title');
+                        const text = floatingCard.getAttribute('data-text');
+                        openModal({ title, text, sourceRect: rect });
+                        return;
                     }
 
-                    setTimeout(() => {
-                        document.addEventListener('click', outsideClickHandler);
-                    }, 100);
-                }
+                    // Handle About Us / Contact Us card click
+                    const modalCard = target.closest('.about-us-card, .contact-us-card');
+                    if (modalCard) {
+                        const modalId = modalCard.getAttribute('data-modal');
+                        const modalEl = document.getElementById(modalId);
+                        if (modalEl) {
+                            modalEl.style.display = 'flex';
+                        } else {
+                            console.error(`Modal with ID '${modalId}' not found!`);
+                        }
+                        return;
+                    }
+
+                    // Handle outside modal click to close
+                    if (
+                        modal.style.display === 'block' &&
+                        modal.classList.contains('open') &&
+                        !modalContent.contains(target) &&
+                        target !== modalCloseBtn
+                    ) {
+                        closeModal();
+                    }
+                });
 
             }, logoMoveTime);
         }, logoFadeInPopOutTime);

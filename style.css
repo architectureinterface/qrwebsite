@@ -305,7 +305,9 @@ header {
   max-height: 100%;
   overflow-y: auto;
   box-sizing: border-box;
-}
+  opacity: 1;
+  transition: opacity 0.3s ease;
+} 
 
 
  .modal-view {
@@ -328,6 +330,10 @@ header {
   height: 60vh !important;
   transform: translate(-50%, -50%) !important;
   overflow-y: auto;
+}
+
+#modal-view:not(.open) .modal-content {
+    opacity: 0;
 }
 
 
