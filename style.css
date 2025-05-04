@@ -3,6 +3,7 @@
 body, html {
   margin: 0;
   padding: 0;
+  overflow : hidden;
   height: calc(var(--vh, 1vh) * 100);
   width:  calc(var(--vw, 1vw) * 100);
   transform: translateZ(0);
@@ -210,13 +211,15 @@ header {
 /* Container for all floating cards */
 .floating-cards-container {
   position: fixed;
-  bottom: 40px;
+  bottom: 65px;
   right: 65px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: calc(var(--vh, 1vh) * 40); /* Fixed container height */
-  width: calc(var(--vw, 1vw) * 25);;
+  height: 25vh; /* Fixed container height */
+  width: 25vw;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out 1s;
   opacity: 0;
   transition: opacity 1.5s ease-in-out 1s;
   box-sizing: border-box;
