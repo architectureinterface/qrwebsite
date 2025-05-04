@@ -332,18 +332,22 @@ header {
   overflow-y: auto;
 }
 
+body.modal-open #main-content {
+  filter: blur(5px); /* Blur the background content */
+  pointer-events: none; /* Prevent clicking behind modal */
+}
+
 @media (max-width: 600px) {
 #modal-view.open {
-    position: fixed;
-    display: flex;
     top: 50% !important;
     left: 50% !important;
-    width: 90vw !important;
-    height: 82vh !important;
+    width: 80vw !important;
+    height: 50vh !important;
     transform: translate(-50%, -42%) !important;
     overflow-y: auto;
 }
 }
+
 
 #modal-view:not(.open) .modal-content {
     opacity: 0;
@@ -402,6 +406,8 @@ header {
     z-index: 999; /* Below loading screen initially */
     opacity: 1; /* Initially hidden */
     transition: opacity 1.5s ease-in-out;
+    transition: filter 0.4s ease; /* Smooth blur */
+
 }
 
 #main-content.visible {
