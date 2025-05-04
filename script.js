@@ -140,4 +140,27 @@ document.addEventListener('DOMContentLoaded', function () {
             }, logoMoveTime);
         }, logoFadeInPopOutTime);
     }, 500);
+
+    const images = document.querySelectorAll('.hero-image');
+    let current = 0;
+  
+    function showNextImage() {
+      // Hide all
+      images.forEach((img, index) => {
+        img.classList.remove('active');
+        img.style.zIndex = -1;
+      });
+  
+      // Show current
+      images[current].classList.add('active');
+      images[current].style.zIndex = 0;
+  
+      // Prepare next
+      current = (current + 1) % images.length;
+    }
+  
+    // Start the loop
+    showNextImage(); // Show first image immediately
+    setInterval(showNextImage, 7000); // Change every 7s
+
 });
