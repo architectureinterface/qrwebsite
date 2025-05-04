@@ -1,4 +1,6 @@
 
+
+
 /* General Body Styles */
 body, html {
   margin: 0;
@@ -69,7 +71,7 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  transform: translate(calc(50vw - 50%), calc(var(--vh, 1vh) * 50 - 50%)) scale(0);
+  transform: translate(calc(var(--vw, 1vw) * 50 - 50%), calc(var(--vh, 1vh) * 55 - 50%)) scale(0);
   transform-origin: center center;
   opacity: 0;
   z-index: 1002;
@@ -82,7 +84,7 @@ header {
 
 #loading-logo.visible {
   opacity: 1;
-  transform: translate(calc(50vw - 50%), calc(var(--vh, 1vh) * 50 - 50%)) scale(1.4);
+  transform: translate(calc(var(--vw, 1vw) * 50 - 50%), calc(var(--vh, 1vh) * 55 - 50%)) scale(1.4);
 }
 
 #loading-logo.moved {
@@ -176,17 +178,11 @@ header {
     transform: translateX(-50%);
     
     color: #fff;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 300;
-    
     z-index: 2;
-    text-align: left;
 
     max-width: 90%;
     padding: 0 20px;
     box-sizing: border-box;
-    overflow-wrap: break-word;
 }
 
 @media (max-width: 600px) {
@@ -194,7 +190,6 @@ header {
     top: 30%;
     left: 50%;
     transform: translateX(-50%);
-    font-weight: 300;
   }
 }
 
@@ -202,10 +197,9 @@ header {
 .hero-heading {
     margin-top: 0;
     margin-bottom: 10px;
-    font-family: 'Roboto', sans-serif; /* Using Roboto */
-    font-weight: 300; /* Apply medium weight */
+    font-family: 'HelveticaNeueLightItalic', sans-serif;
     font-size: 4.5em;
-    line-height: 1.1;
+    line-height: 1;
     text-align: center;
 }
 
@@ -385,7 +379,7 @@ body.modal-open #main-content {
     }
 
     .hero-heading {
-        font-size: 3em;
+        font-size: 3.8em;
     }
 
     .hero-subheading {
