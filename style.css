@@ -334,6 +334,8 @@ header {
 
 @media (max-width: 600px) {
 #modal-view.open {
+    position: fixed;
+    display: flex;
     top: 50% !important;
     left: 50% !important;
     width: 90vw !important;

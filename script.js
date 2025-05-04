@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     requestAnimationFrame(() => {
                         modal.classList.add('open');
+                        document.body.classList.add('modal-open');
+
                         modal.addEventListener('transitionend', function handler() {
                             modalContent.innerHTML = `
                                 <h2>${title}</h2>
@@ -72,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     modalContent.innerHTML = '';
                 
                     modal.classList.remove('open');
+                    document.body.classList.remove('modal-open');
+
                 
                     modal.addEventListener('transitionend', function handler() {
                         modal.style.display = 'none';
