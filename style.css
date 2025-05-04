@@ -357,7 +357,7 @@ body.modal-open #main-content {
     top: 50% !important;
     left: 50% !important;
     width: 80vw !important;
-    height: 50vh !important;
+    height: 60vh !important;
     transform: translate(-50%, -42%) !important;
     overflow-y: auto;
 }

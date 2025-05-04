@@ -62,13 +62,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                 modalContent.innerHTML = `
                                     <h2>Contact Us</h2>
                                     <div class="map-preview">
-                                        <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019027636719!2d-122.41941538468173!3d37.77492927975944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c5c8c2c7b%3A0xc2c3eb2a3b3d3f13!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1615160000000"
-                                            width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade">
-                                        </iframe>
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.6260937735015!2d76.30293067360313!3d9.965034073638318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0873c3746e238d%3A0x5fcbca090798b116!2sarchitecture%20interface!5e0!3m2!1sen!2sin!4v1746340238604!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
-                                    <p class="map-address">123 Example Street, San Francisco, CA 94102</p>
+                                        <p class="map-address">
+    Architecture Interface<br>
+    55-3355 E, Ravindran Rd, Elamkulam,<br>
+    Kochi, Ernakulam,<br>
+    Kerala 682020
+</p>
                                 `;
                             } else {
                                 modalContent.innerHTML = `
