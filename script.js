@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const mainContent = document.getElementById('main-content');
     const floatingCardsContainer = document.querySelector('.floating-cards-container');
 
-    const backdrop = document.getElementById('modal-backdrop');
     const modal = document.getElementById('modal-view');
     const modalContent = modal.querySelector('.modal-content');
     const modalCloseBtn = modal.querySelector('.close-button');

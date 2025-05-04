@@ -355,25 +355,6 @@ body.modal-open #main-content {
 }
 
 
-#modal-backdrop {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100dvw; height: 100dvh;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.5s ease;
-  z-index: 999;
-  display: none;
-}
-
-
-#modal-backdrop.active {
-  background: rgba(0, 0, 0, 0.6);
-  display: block;
-}
-
-
-
-
 #main-content {
     position: relative; /* Ensure it's in the flow */
     z-index: 999; /* Below loading screen initially */
