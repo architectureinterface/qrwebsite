@@ -371,34 +371,6 @@ body.modal-open #main-content {
 }
 
 
-.modal-view .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #ff5f5f;
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: #ff5252;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 1002;
-}
-
-
 
 
 #main-content {
