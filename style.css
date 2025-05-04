@@ -326,10 +326,21 @@ header {
 #modal-view.open {
   top: 50% !important;
   left: 50% !important;
-  width: 80vw !important;
-  height: 60vh !important;
-  transform: translate(-50%, -50%) !important;
+  width: 90vw !important;
+  height: 80vh !important;
+  transform: translate(-50%, -40%) !important;
   overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+#modal-view.open {
+    top: 50% !important;
+    left: 50% !important;
+    width: 90vw !important;
+    height: 82vh !important;
+    transform: translate(-50%, -42%) !important;
+    overflow-y: auto;
+}
 }
 
 #modal-view:not(.open) .modal-content {
