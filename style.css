@@ -3,12 +3,10 @@
 body, html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);
-  width: 100vw;
+  width:  calc(var(--vw, 1vw) * 100);
   transform: translateZ(0);
   backface-visibility: hidden;
-  scrollbar-gutter: stable;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   background-color: #000000;
@@ -95,7 +93,7 @@ header {
 /* Hero Section */
 .hero {
     position: relative;
-    height: 100vh; /* Full screen height */
+    height:  calc(var(--vh, 1vh) * 100); /* Full screen height */
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -106,8 +104,8 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width:  calc(var(--vw, 1vw) * 100);
+  height:  calc(var(--vh, 1vh) * 100);
   overflow: hidden; /* ✅ Important */
   z-index: -2; /* behind everything else */
 }

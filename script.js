@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setViewportUnits();
     window.addEventListener('resize', setViewportUnits);
+    window.addEventListener('orientationchange', setViewportUnits);
 
     // Main loading animation
     setTimeout(() => {
