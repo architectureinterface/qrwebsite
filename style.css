@@ -3,8 +3,8 @@
 body, html {
   margin: 0;
   padding: 0;
-  overflow : hidden;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100%;
+  overflow: hidden;
   width:  calc(var(--vw, 1vw) * 100);
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -15,6 +15,11 @@ body, html {
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
 }
 
 header {
@@ -215,11 +220,9 @@ header {
   right: 65px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   height: 25vh; /* Fixed container height */
   width: 25vw;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out 1s;
   opacity: 0;
   transition: opacity 1.5s ease-in-out 1s;
   box-sizing: border-box;
@@ -231,13 +234,14 @@ header {
   .floating-cards-container {
   position: fixed;
     width: 100%; /* fallback */
-    width: calc(var(--vw, 1vw) * 60); /* preferred */
-    height: calc(var(--vh, 1vh) * 15);
+    width: calc(var(--vw, 1vw) * 50); /* preferred */
+    height: calc(var(--vh, 1vh) * 13);
     left: 50%;
     bottom: 10%;
     transform: translateX(-50%);
-    max-width: calc(var(--vw, 1vw) * 60);
-    max-height: calc(var(--vh, 1vh) * 15);
+    gap: 20px;
+    max-width: calc(var(--vw, 1vw) * 50);
+    max-height: calc(var(--vh, 1vh) * 13);
     display: flex;
     justify-content: space-between;
 
