@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (title=='Contact Us') {
                                 modalContent.innerHTML = `
                                       <h2 style="text-align: center;">Contact Us</h2>
-
+                                      <p>Email: <a href="mailto:studio@architectureinterface.in">studio@architectureinterface.in</a></p>
+                                      <p>Mobile: <a href="tel:+8848152173">+91 8848 152 173</a></p>
                                     <div class="map-preview">
                                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.6260937735015!2d76.30293067360313!3d9.965034073638318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0873c3746e238d%3A0x5fcbca090798b116!2sarchitecture%20interface!5e0!3m2!1sen!2sin!4v1746340238604!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
