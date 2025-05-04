@@ -222,12 +222,13 @@ header {
   opacity: 0;
   transition: opacity 1.5s ease-in-out 1s;
   box-sizing: border-box;
-  z-index: 9999;   
+  z-index: 1000;   
   align-items: stretch;
 }
 
 @media (max-width: 600px) {
   .floating-cards-container {
+  position: fixed;
     width: 100%; /* fallback */
     width: calc(var(--vw, 1vw) * 60); /* preferred */
     height: calc(var(--vh, 1vh) * 15);
