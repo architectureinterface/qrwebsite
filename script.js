@@ -73,7 +73,13 @@ document.addEventListener('DOMContentLoaded', function () {
     Kerala 682020
 </p>
                                 `;
-                            } else {
+                            } else if (title=='About Us') {
+                                modalContent.innerHTML = `
+                                      <h2 style="text-align: center;">Contact Us</h2>
+                                      <p> Architecture Interface is a Kochi-based architecture firm that specializes in crafting personalized spaces. With emphasis on thoughtful design and contextual sensitivity, the studio blends refined aesthetics with a an understanding of client lifestyles. Every project is approached as a unique dialogue between people, place, and purpose — resulting in architecture that is both intimate and timeless. </p> 
+                                `;
+                            } 
+                            else {
                                 modalContent.innerHTML = `
                                     <h2>${title}</h2>
                                     <p>${text}</p>
